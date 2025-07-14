@@ -5,7 +5,7 @@ const googleai = new GoogleGenerativeAI(import.meta.env.VITE_GOGGLE_AI_API_KEY)
 export class Assistant {
   #chat;
 
-  constructor(model = 'gemini-1.5-flash') {
+  constructor(model = 'gemini-2.5-flash') {
     const gemini = googleai.getGenerativeModel({ model })
     this.#chat = gemini.startChat({ history: [] })
   }
