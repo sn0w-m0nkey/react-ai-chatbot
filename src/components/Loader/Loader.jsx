@@ -2,8 +2,8 @@ import styles from './Loader.module.css'
 
 export function Loader() {
   return (
-    <div>
+    <div className={styles.LoaderWrapper}>
       <div className={styles.Loader} />
     </div>
-  )
+  );
 }
