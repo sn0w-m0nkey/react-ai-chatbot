@@ -36,6 +36,7 @@ export function Controls({ isDisabled = false, onSend }) {
         <TextareaAutosize
           ref={textAreaRef}
           className={styles.TextArea}
+          disabled={isDisabled}
           placeholder='Message AI Chatbot'
           value={content}
           minRows={1}
