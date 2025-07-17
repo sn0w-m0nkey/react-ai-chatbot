@@ -1,17 +1,13 @@
 import { useState } from 'react';
-//import { Assistant } from './assistants/googlegenai'
-//import { Assistant } from './assistants/googlegenerativeai'
-//import { Assistant } from './assistants/openai'
-//import { Assistant } from "./assistants/deepseekai"
-//import { Assistant } from './assistants/anthropicai';
-import { Assistant } from './assistants/xai';
 import { Loader } from './components/Loader/Loader'
 import { Chat } from './components/Chat/Chat'
 import { Controls } from './components/Controls/Controls'
+import { Assistant } from './components/Assistant/Assistant'
 import styles from './App.module.css'
 
+let assistant
+
 function App() {
-  const assistant = new Assistant()
   const [messages, setMessages] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isStreaming, setIsStreaming] = useState(false)
@@ -63,6 +59,10 @@ function App() {
     }
   }
 
+  function handleAssistantChange(newAssistant) {
+    assistant = newAssistant
+  }
+
   return (
     <>
       <div className={styles.App}>
@@ -75,7 +75,10 @@ function App() {
         <div className={styles.ChatContainer}>
           <Chat messages={messages} />
         </div>
-        <Controls isDisabled={isLoading || isStreaming} onSend={handleContentSend} />
+        <Controls
+          isDisabled={isLoading || isStreaming}
+          onSend={handleContentSend} />
+        <Assistant onAssistantChange={handleAssistantChange} />
       </div>
     </>
   )
