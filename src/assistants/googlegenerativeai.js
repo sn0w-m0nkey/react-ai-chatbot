@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const googleai = new GoogleGenerativeAI(
-  import.meta.env.VITE_GOGGLE_AI_API_KEY + 1
+  import.meta.env.VITE_GOGGLE_AI_API_KEY
 )
 
 export class Assistant {

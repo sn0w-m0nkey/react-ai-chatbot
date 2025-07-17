@@ -1,7 +1,7 @@
 import OpenAI from 'openai'
 
 const openai = new OpenAI({
-  apiKey: import.meta.env.VITE_OPEN_AI_API_KEY + 1,
+  apiKey: import.meta.env.VITE_OPEN_AI_API_KEY,
   dangerouslyAllowBrowser: true
 })
 
@@ -9,7 +9,7 @@ export class Assistant {
   #client
   #model
 
-  constructor(model = 'gpt-4o-mini1', client = openai) {
+  constructor(model = 'gpt-4o-mini', client = openai) {
     this.#client = client
     this.#model = model
   }
