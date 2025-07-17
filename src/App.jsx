@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Assistant } from './assistants/googlegenai'
-//import { Assistant } from './assistants/googleai'
+//import { Assistant } from './assistants/googlegenai'
+//import { Assistant } from './assistants/googlegenerativeai'
 //import { Assistant } from './assistants/openai'
-//import { Assistant } from "./assistants/deepseekai"
+import { Assistant } from "./assistants/deepseekai"
 import { Loader } from './components/Loader/Loader'
 import { Chat } from './components/Chat/Chat'
 import { Controls } from './components/Controls/Controls'
@@ -32,9 +32,11 @@ function App() {
     setIsLoading(true)
 
     try {
-      const result = await assistant.chatStream(content, messages)
-      let isFirstChunk = false
+      const result = await assistant.chatStream(
+        content,
+        messages.filter(({ role }) => role !== 'system'))
 
+      let isFirstChunk = false
       for await (const chunk of result) {
         if (!isFirstChunk) {
           isFirstChunk = true
@@ -49,7 +51,9 @@ function App() {
       setIsStreaming(false)
     } catch (error) {
       addMessage({
-        content: `Sorry, we encountered an error, please try again: ${error}`,
+        content:
+          error?.message ??
+          `Sorry, we encountered an error, please try again.`,
         role: 'system'
       })
       setIsLoading(false)

@@ -1,7 +1,7 @@
 import OpenAI from 'openai'
 
 const openai = new OpenAI({
-  apiKey: import.meta.env.VITE_OPEN_AI_API_KEY,
+  apiKey: import.meta.env.VITE_OPEN_AI_API_KEY + 1,
   dangerouslyAllowBrowser: true
 })
 
@@ -9,7 +9,7 @@ export class Assistant {
   #client
   #model
 
-  constructor(model = 'gpt-4o-mini', client = openai) {
+  constructor(model = 'gpt-4o-mini1', client = openai) {
     this.#client = client
     this.#model = model
   }
@@ -23,7 +23,7 @@ export class Assistant {
 
       return result.choices[0].message.content
     } catch (error) {
-      throw error
+      throw this.#parseError(error)
     }
   }
 
@@ -39,7 +39,12 @@ export class Assistant {
         yield chink.choices[0]?.delta?.content || ''
       }
     } catch (error) {
-      throw error
+
+      throw this.#parseError(error)
     }
+  }
+
+  #parseError(error) {
+    return error
   }
 }

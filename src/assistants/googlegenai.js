@@ -1,7 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 
 const googleai = new GoogleGenAI({
-  apiKey: import.meta.env.VITE_GOGGLE_AI_API_KEY
+  apiKey: import.meta.env.VITE_GOGGLE_AI_API_KEY + 1
 })
 
 export class Assistant {
@@ -17,7 +17,7 @@ export class Assistant {
       return result.text
     }
     catch (error) {
-      throw error
+      throw this.#parseError(error)
     }
   }
 
@@ -29,7 +29,22 @@ export class Assistant {
         yield chunk.text
       }
     } catch (error) {
-      throw error
+      throw this.#parseError(error)
+    }
+  }
+
+  #parseError(error) {
+    try {
+      // Extract and parse the outer error JSON from the message string
+      const [, outerErrorJSON] = error?.message?.split(" . ");
+      const outerErrorObject = JSON.parse(outerErrorJSON);
+
+      // Parse the nested stringified JSON from the outer error
+      const innerErrorObject = JSON.parse(outerErrorObject?.error?.message);
+
+      return innerErrorObject?.error;
+    } catch (parseError) {
+      return error;
     }
   }
 }

@@ -3,7 +3,7 @@ import { Assistant as OpenAIAssistant } from './openai'
 
 const openai = new OpenAI({
   baseURL: 'https://api.deepseek.com',
-  apiKey: import.meta.env.VITE_DEEPSEEK_AI_API_KEY,
+  apiKey: import.meta.env.VITE_DEEPSEEK_AI_API_KEY + 1,
   dangerouslyAllowBrowser: true,
 })
 
