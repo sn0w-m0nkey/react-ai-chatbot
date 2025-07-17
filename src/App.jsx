@@ -3,6 +3,7 @@ import { Loader } from './components/Loader/Loader'
 import { Chat } from './components/Chat/Chat'
 import { Controls } from './components/Controls/Controls'
 import { Assistant } from './components/Assistant/Assistant'
+import { Theme } from './components/Theme/Theme'
 import styles from './App.module.css'
 
 let assistant
@@ -78,7 +79,10 @@ function App() {
         <Controls
           isDisabled={isLoading || isStreaming}
           onSend={handleContentSend} />
-        <Assistant onAssistantChange={handleAssistantChange} />
+        <div className={styles.Configuration}>
+          <Assistant onAssistantChange={handleAssistantChange} />
+          <Theme />
+        </div>
       </div>
     </>
   )
