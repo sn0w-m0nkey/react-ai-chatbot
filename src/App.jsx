@@ -66,32 +66,30 @@ function App() {
   }
 
   return (
-    <>
-      <div className={styles.App}>
-        {isLoading && <Loader />}
-        <div className={styles.Header}></div>
-        <header className={styles.Header}>
-          <img src='/chat-bot.png' className={styles.Logo} />
-          <h2 className={styles.Title}>AI Chatbot</h2>
-        </header>
+    <div className={styles.App}>
+      {isLoading && <Loader />}
+      <div className={styles.Header}></div>
+      <header className={styles.Header}>
+        <img src='/chat-bot.png' className={styles.Logo} />
+        <h2 className={styles.Title}>AI Chatbot</h2>
+      </header>
 
-        <div className={styles.Content}>
-          <Sidebar />
-          <main className={styles.ChatContainer}>
-            <div className={styles.ChatContainer}>
-              <Chat messages={messages} />
-            </div>
-            <Controls
-              isDisabled={isLoading || isStreaming}
-              onSend={handleContentSend} />
-            <div className={styles.Configuration}>
-              <Assistant onAssistantChange={handleAssistantChange} />
-              <Theme />
-            </div>
-          </main>
-        </div>
+      <div className={styles.Content}>
+        <Sidebar />
+        <main className={styles.Main}>
+          <div className={styles.ChatContainer}>
+            <Chat messages={messages} />
+          </div>
+          <Controls
+            isDisabled={isLoading || isStreaming}
+            onSend={handleContentSend} />
+          <div className={styles.Configuration}>
+            <Assistant onAssistantChange={handleAssistantChange} />
+            <Theme />
+          </div>
+        </main>
       </div>
-    </>
+    </div>
   )
 }
 
