@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Sidebar } from './components/Sidebar/Sidebar'
 import { Loader } from './components/Loader/Loader'
 import { Chat } from './components/Chat/Chat'
 import { Controls } from './components/Controls/Controls'
@@ -73,15 +74,21 @@ function App() {
           <img src='/chat-bot.png' className={styles.Logo} />
           <h2 className={styles.Title}>AI Chatbot</h2>
         </header>
-        <div className={styles.ChatContainer}>
-          <Chat messages={messages} />
-        </div>
-        <Controls
-          isDisabled={isLoading || isStreaming}
-          onSend={handleContentSend} />
-        <div className={styles.Configuration}>
-          <Assistant onAssistantChange={handleAssistantChange} />
-          <Theme />
+
+        <div className={styles.Content}>
+          <Sidebar />
+          <main className={styles.ChatContainer}>
+            <div className={styles.ChatContainer}>
+              <Chat messages={messages} />
+            </div>
+            <Controls
+              isDisabled={isLoading || isStreaming}
+              onSend={handleContentSend} />
+            <div className={styles.Configuration}>
+              <Assistant onAssistantChange={handleAssistantChange} />
+              <Theme />
+            </div>
+          </main>
         </div>
       </div>
     </>
