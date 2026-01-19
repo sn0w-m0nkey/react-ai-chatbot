@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Loader } from '../Loader/Loader'
 import { Messages } from '../Messages/Messages'
 import { Controls } from '../Controls/Controls'
 import styles from './Chat.module.css'
 
-export function Chat({ assistant }) {
+export function Chat({ assistant, chatId, chatMessages }) {
   const [messages, setMessages] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isStreaming, setIsStreaming] = useState(false)
+
+useEffect(() => {
+  setMessages(chatMessages)
+}, [chatId])
 
   function updateLastMessageContent(content) {
     setMessages((prevMessages) =>
