@@ -62,6 +62,11 @@ function App() {
     setActiveChatId(newChat.id)
   }
 
+  function handleActiveChatIdChange(id) {
+    setActiveChatId(id)
+    setChats((prevChats) => prevChats.filter(({ messages }) => messages.length > 0))
+  }
+
   return (
     <div className={styles.App}>
       <div className={styles.Header}></div>
@@ -74,7 +79,8 @@ function App() {
         <Sidebar
           chats={chats}
           activeChatId={activeChatId}
-          onActiveChatIdChange={setActiveChatId}
+          activeChatMessages={activeChatMessages}
+          onActiveChatIdChange={handleActiveChatIdChange}
           onNewChatCreate={handleNewChatCreate}
         />
 
@@ -83,6 +89,7 @@ function App() {
             assistant={assistant}
             chatId={activeChatId}
             chatMessages={activeChatMessages}
+            onActiveChatIdChange={handleActiveChatIdChange}
             onChatMessagesUpdate={handleChatMessagesUpdate}
           />
           <div className={styles.Configuration}>

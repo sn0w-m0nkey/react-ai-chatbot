@@ -4,7 +4,7 @@ import { Messages } from '../Messages/Messages'
 import { Controls } from '../Controls/Controls'
 import styles from './Chat.module.css'
 
-export function Chat({ assistant, chatId, chatMessages, onChatMessagesUpdate }) {
+export function Chat({ assistant, chatId, chatMessages, onActiveChatIdChange, onChatMessagesUpdate }) {
   const [messages, setMessages] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isStreaming, setIsStreaming] = useState(false)
