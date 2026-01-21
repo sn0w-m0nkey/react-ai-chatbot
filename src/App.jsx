@@ -45,16 +45,17 @@ function App() {
   }
 
   function handleChatMessagesUpdate(messages) {
+    const title = messages[0]?.content.split(' ').slice(0, 7).join(' ')
+
     setChats((prevChats) =>
       prevChats.map((chat) =>
-        chat.id === activeChatId ? { ...chat, messages } : chat
+        chat.id === activeChatId ? { ...chat, title: chat.title ?? title, messages } : chat
       ))
   }
 
   function handleNewChatCreate() {
     const newChat = {
       id: uuidv4(),
-      title: "New Chat",
       messages: [],
     }
 
