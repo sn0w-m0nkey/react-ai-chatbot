@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './Sidebar.module.css'
 
-export function Sidebar({ chats, activeChatId, onActiveChatIdChange }) {
+export function Sidebar({ chats, activeChatId, onActiveChatIdChange, onNewChatCreate }) {
   const [isOpen, setIsOpen] = useState(false)
 
   function handleSidebarToggle() {
@@ -32,6 +32,7 @@ export function Sidebar({ chats, activeChatId, onActiveChatIdChange }) {
         <MenuIcon />
       </button>
       <div className={styles.Sidebar} data-open={isOpen}>
+        <button className={styles.NewChatButton} onClick={onNewChatCreate}>New Chat</button>
         <ul className={styles.Chats}>
           {chats.map((chat) => (
             <li
