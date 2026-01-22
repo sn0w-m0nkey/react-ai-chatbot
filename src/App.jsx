@@ -44,12 +44,14 @@ function App() {
     setAssistant(newAssistant)
   }
 
-  function handleChatMessagesUpdate(messages) {
+  function handleChatMessagesUpdate(id, messages) {
     const title = messages[0]?.content.split(' ').slice(0, 7).join(' ')
 
     setChats((prevChats) =>
       prevChats.map((chat) =>
-        chat.id === activeChatId ? { ...chat, title: chat.title ?? title, messages } : chat
+        chat.id === id
+          ? { ...chat, title: chat.title ?? title, messages }
+          : chat
       ))
   }
 
@@ -86,13 +88,16 @@ function App() {
         />
 
         <main className={styles.Main}>
-          <Chat
-            assistant={assistant}
-            chatId={activeChatId}
-            chatMessages={activeChatMessages}
-            onActiveChatIdChange={handleActiveChatIdChange}
-            onChatMessagesUpdate={handleChatMessagesUpdate}
-          />
+          {chats.map((chat) => (
+            <Chat
+              key={chat.id}
+              assistant={assistant}
+              isActive={chat.id === activeChatId}
+              chatId={chat.id}
+              chatMessages={chat.messages}
+              onChatMessagesUpdate={handleChatMessagesUpdate}
+            />
+          ))}
           <div className={styles.Configuration}>
             <Assistant onAssistantChange={handleAssistantChange} />
             <Theme />
